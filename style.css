@@ -107,6 +107,25 @@ header {
     transition: 0.3s;
 }
 
+.dot {
+    height: 8px;
+    width: 8px;
+    background-color: pink;
+    border-radius: 50%;
+    opacity: 0.4;
+
+    &:active {
+        opacity: 1;
+    };
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+.selected {
+    background: red;
+}
+
 img {
     object-fit: scale-down;
     object-position: center;
@@ -119,8 +138,15 @@ img {
 .btn-container {
     display: flex;
     justify-content: center;
-    align-items: stretch;
+
 }
+
+.footer > :first-child {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
+
 
 .btn-container > button {
     background: lightcoral;

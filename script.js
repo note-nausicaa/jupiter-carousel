@@ -225,8 +225,10 @@ function fetchImageGallery(any) {
             img.src = `${response.collection.items[x].links[0].href}`;
         })
 
+        img.id = x;
+
         return img;
-    }
+    };
 
     
 
@@ -245,12 +247,25 @@ function fetchImageGallery(any) {
         mainDiv.appendChild(nextDiv);
 
         mainDivContainer.appendChild(mainDiv)
+        let dotDiv = document.createElement('div');
 
         this.imageList = mainDiv.childNodes;
 
         for (let i = 0; i < 3; i++) {
             this.array.push(i);
             this.imageList[i].appendChild(getImage(this.moon, i));
+            // Create corresponding dots
+            let span = document.createElement('span');
+            span.id = i;
+            span.classList.add('dot')
+            dotDiv.appendChild(span);
+
+            span.addEventListener('click', () => {
+                let spanNum = parseInt(span.id)
+                let newArray = [spanNum-1, spanNum, spanNum+1];
+                this.array = newArray;
+                updateImage();
+            })
         }
 
         //Imeplement clicking functions for prevDIv and nextDiv
@@ -279,21 +294,41 @@ function fetchImageGallery(any) {
             })
         
         btnContainer.appendChild(leftBtn)
-        btnContainer.appendChild(rightBtn)
+        btnContainer.appendChild(rightBtn);
 
-        mainDivContainer.appendChild(btnContainer);
+        let footer = document.createElement('div')
+        footer.classList.add('footer')
+
+        footer.appendChild(dotDiv)
+        footer.appendChild(btnContainer)
+
+        mainDivContainer.appendChild(footer);
+
+        this.navigator = dotDiv.childNodes;
+        
+        setInterval(()=> nextImage(), 5000)
+        setInterval(()=> console.log('hey'), 5000)
 
         return mainDivContainer;
-    }
+    };
 
     const nextImage = () => {
-
-        let prevArray = this.array;
-
         let newArray = this.array.map((num) => {return num+1})
+        this.array = newArray;
+        updateImage();
+
+    };
+
+    const prevImage = () => {
+
+        let newArray = this.array.map((num) => {return num-1})
 
         this.array = newArray;
+        updateImage();
 
+    };
+
+    function updateImage () {
         for (let i = 0; i < 3; i++) {
             
             if (this.imageList[i].firstElementChild.src = '') {
@@ -302,27 +337,11 @@ function fetchImageGallery(any) {
                 
             else {
                 this.imageList[i].replaceChild(getImage(this.moon, this.array[i]), this.imageList[i].firstElementChild);
+                
             }
-            
         }
+
     }
-
-    const prevImage = () => {
-
-        let newArray = this.array.map((num) => {return num-1})
-
-        this.array = newArray;
-
-        for(let i=0; i < 3; i++) {
-            if (this.array[i] < 0) {
-                this.imageList[i].firstElementChild.src = '';
-            }
-
-            else if (this.array[i] >= 0) {
-                this.imageList[i].replaceChild(getImage(this.moon, this.array[i]), this.imageList[i].firstElementChild)
-            };
-        };
-    };
 
 
     return {
