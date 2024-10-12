@@ -1,0 +1,184 @@
+body {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-rows: 15vh auto;
+    margin: 0;
+    justify-content: center;
+    background: linear-gradient(rgba(135, 206, 250, 0.603), rgba(245, 245, 245, 0.459));
+}
+
+body, header, button, nav, div {font-family: fantasy;}
+
+h1 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+header {
+    grid-row: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-self: stretch;
+}
+
+#content {
+    width: 100%;
+    padding: 0.3%;
+}
+
+
+.image-gallery {
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+    width: 100vw;
+}
+
+.image-gallery > div {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.image-gallery > :nth-child(2) {
+    order: 2;
+    box-shadow: 0px 0px 30px grey;
+    min-width: 40vw;
+    min-height: 43vh;
+    z-index: 1;
+    align-self: center;
+    align-items: center;
+}
+
+
+.image-gallery > :nth-child(3) {
+    order: 3;
+}
+
+.image-gallery > :first-child,
+.image-gallery > :nth-child(3){
+    opacity: 30%;
+    overflow:hidden;
+    filter:blur(4px);
+    flex-basis: auto;
+    flex: 0 5 auto;
+    mask-image: linear-gradient(lightskyblue, rgba(248, 248, 248, 0.644));
+}
+
+.image-gallery > :first-child {
+    order: 1;
+}
+
+
+.image-gallery > :nth-child(3) {
+    order: 3;
+    background-image: linear-gradient(black, rgba(0, 0, 0, 0.555));
+}
+
+.image-gallery>:nth-child(3):hover,
+.image-gallery>:first-child:hover {
+    opacity: 0.7;
+    filter:blur(2px);
+    z-index: 1;
+    transform: scale(1.1);
+    transition: 0.3s;
+    box-shadow: 0px 0px 100px grey;
+}
+
+.image-gallery>:nth-child(3):active {
+    transform: translateX(-10vw);
+    transition: 3s;
+}
+
+.image-gallery>:first-child:active {
+    transform: translateX(10vw);
+    transition: 3s;
+}
+
+.image-gallery>:nth-child(2):hover {
+    transform: scale(1.2);
+    transition: 0.3s;
+}
+
+img {
+    object-fit: scale-down;
+    object-position: center;
+}
+
+.image-gallery>:nth-child(2) img {
+    object-fit: contain;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.btn-container > button {
+    background: lightcoral;
+    color: white;
+    border: none;
+    height: 5vh;
+    width: 5vw;
+    box-shadow: 0px 0px 5px rgba(128, 128, 128, 0.363);
+
+    &:active {
+        background: pink;
+        transition: 2s;
+        box-shadow: inset 0px 0px 20px lightcoral;
+        margin-top: 4px;
+    }
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+menu {
+    margin: 0;
+    padding: 3px;
+}
+
+li:hover {
+    background: coral;
+    color: white;
+}
+
+nav,
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown:hover > button {
+    background: blue;
+}
+
+.dropdown-content {
+    display: none;
+    border-radius: 10px;
+    border: none;
+    background: rgba(32, 178, 171, 0.459);
+}
+
+.dropdown:hover .dropdown-content {display: block; position: absolute; }
+
+.dropdown > button {
+    background: lightseagreen;
+    border: none;
+    border-radius: 10px;
+}
+
+.hide {
+    display: none;
+}
